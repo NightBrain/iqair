@@ -48,8 +48,12 @@
             const vH = window.innerHeight;
             const scaleX = vW / wW;
             const scaleY = vH / wH;
-            const scale = Math.max(scaleX, scaleY);
-            wrap.style.transform = `scale(${scale})`;
+            const scale = Math.min(scaleX, scaleY);
+            const scaledW = wW * scale;
+            const scaledH = wH * scale;
+            const offsetX = (vW - scaledW) / 2;
+            const offsetY = (vH - scaledH) / 2;
+            wrap.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(${scale})`;
         }
         setTimeout(scaleWidget, 1000);
         window.addEventListener('resize', () => setTimeout(scaleWidget, 100));
